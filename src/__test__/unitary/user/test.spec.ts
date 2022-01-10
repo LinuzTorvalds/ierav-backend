@@ -36,7 +36,10 @@ describe('nada º~º', () => {
 
       const end: string = saturday
 
-      if (birthday.substring(3, 5) == start.substring(3, 5)) {
+      if (
+        birthday.substring(3, 5) == start.substring(3, 5) ||
+        birthday.substring(3, 5) == end.substring(3, 5)
+      ) {
         if (
           birthday.substring(0, 2) >= start.substring(0, 2) &&
           birthday.substring(0, 2) <= end.substring(0, 2)
