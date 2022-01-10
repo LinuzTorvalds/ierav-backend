@@ -19,7 +19,7 @@ describe('Sign up user', () => {
       Email: 'test@gmail.com',
       Password: passwordHash,
       Charge: 'membro',
-      Birthday: '2003-03-26',
+      Birthday: '26-03-2003',
     })
 
     expect(user).toHaveProperty('code')
@@ -33,7 +33,7 @@ describe('Sign up user', () => {
       Email: 'testexisting@gmail.com',
       Password: '123',
       Charge: 'membro',
-      Birthday: '2003-03-27',
+      Birthday: '27-03-2003',
     })
 
     await expect(

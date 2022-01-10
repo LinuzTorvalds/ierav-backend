@@ -1,22 +1,51 @@
 import { PrismaClient, User } from '@prisma/client'
-
-let prisma: PrismaClient
+import moment from 'moment'
 
 describe('nada º~º', () => {
-  beforeAll(() => {
-    prisma = new PrismaClient()
-  })
   it('test 0_0', async () => {
     const prisma = new PrismaClient()
 
     let users: User[]
 
-    let user: User
+    users = await prisma.user.findMany()
 
-    users = await prisma.user.findMany().finally()
+    const today = new Date('03/20/2022')
 
-    for (user of users) console.log(user.birthday)
+    var sunday, saturday
 
-    console.log(user)
+    if (today.getDay() === 0) {
+      sunday = moment(today).format('DD-MM')
+
+      saturday = moment(today).add(6, 'days').format('DD-MM')
+    } else {
+      const days = 7 - today.getDay()
+
+      sunday = moment(today).add(days, 'days').toDate()
+
+      saturday = moment(sunday).add(6, 'days').format('DD-MM')
+
+      sunday = moment(sunday).format('DD-MM')
+    }
+
+    let listUsers = []
+
+    for (let user of users) {
+      const birthday = user.birthday.substring(0, 5)
+
+      const start: string = sunday
+
+      const end: string = saturday
+
+      if (birthday.substring(3, 5) == start.substring(3, 5)) {
+        if (
+          birthday.substring(0, 2) >= start.substring(0, 2) &&
+          birthday.substring(0, 2) <= end.substring(0, 2)
+        ) {
+          // console.log(birthday.substring(0, 2))
+          listUsers.push({ ...user })
+        }
+      }
+    }
+    console.log(listUsers)
   })
 })
