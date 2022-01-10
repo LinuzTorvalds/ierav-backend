@@ -1,7 +1,7 @@
 import { PrismaClient, User } from '@prisma/client'
 import moment from 'moment'
 
-export default class BirthdayListService {
+export default class WeddingBirthdayList {
   async execute() {
     const prisma = new PrismaClient()
 
@@ -27,31 +27,31 @@ export default class BirthdayListService {
       sunday = moment(sunday).format('DD-MM')
     }
 
-    let listUsers = []
+    let listUsersMarriage = []
 
     for (let user of users) {
-      const birthday = user.birthday.substring(0, 5)
+      const weddingAnniversary = user.weddingAnniversary.substring(0, 5)
 
       const start: string = sunday
 
       const end: string = saturday
 
       if (
-        birthday.substring(3, 5) == start.substring(3, 5) ||
-        birthday.substring(3, 5) == end.substring(3, 5)
+        weddingAnniversary.substring(3, 5) == start.substring(3, 5) ||
+        weddingAnniversary.substring(3, 5) == end.substring(3, 5)
       ) {
         if (
-          birthday.substring(0, 2) >= start.substring(0, 2) &&
-          birthday.substring(0, 2) <= end.substring(0, 2)
+          weddingAnniversary.substring(0, 2) >= start.substring(0, 2) &&
+          weddingAnniversary.substring(0, 2) <= end.substring(0, 2)
         ) {
-          listUsers.push({ ...user })
+          listUsersMarriage.push({ ...user })
         }
       }
     }
 
     prisma.$disconnect()
 
-    if (listUsers.length == 0) return null
-    else return listUsers
+    if (listUsersMarriage.length == 0) return null
+    else return listUsersMarriage
   }
 }

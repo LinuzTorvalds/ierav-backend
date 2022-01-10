@@ -10,5 +10,6 @@ export default class BirthdayUserControl {
     const user = await birthday.execute(Birthday).finally()
 
     if (user == true) return response.json('0k')
+    else return response.json('no')
   }
 }
