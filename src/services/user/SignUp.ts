@@ -10,6 +10,7 @@ type userRequest = {
   Password: string
   Charge: string
   Birthday: string
+  WeddingAnniversary: string
 }
 
 export default class SignUpUserService {
@@ -21,6 +22,7 @@ export default class SignUpUserService {
     Password,
     Charge,
     Birthday,
+    WeddingAnniversary,
   }: userRequest) {
     const prisma = new PrismaClient()
 
@@ -44,6 +46,7 @@ export default class SignUpUserService {
         password: passwordHash,
         charge: Charge,
         birthday: Birthday,
+        weddingAnniversary: WeddingAnniversary,
       },
     })
 
@@ -55,6 +58,7 @@ export default class SignUpUserService {
       email: Email,
       charge: user.charge,
       birthday: user.birthday,
+      weddingAnniversary: user.weddingAnniversary,
     }
 
     prisma.$disconnect()

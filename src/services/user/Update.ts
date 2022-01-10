@@ -8,12 +8,21 @@ type userRequest = {
   Email: string
   Password: string
   Birthday: string
+  WeddingAnniversary: string
 }
 
 export default class UpdateUserService {
   async execute(
     Code: string,
-    { Name, Sex, MaritalStatus, Email, Password, Birthday }: userRequest
+    {
+      Name,
+      Sex,
+      MaritalStatus,
+      Email,
+      Password,
+      Birthday,
+      WeddingAnniversary,
+    }: userRequest
   ) {
     const prisma = new PrismaClient()
 
@@ -29,6 +38,7 @@ export default class UpdateUserService {
         email: Email,
         password: passwordHash,
         birthday: Birthday,
+        weddingAnniversary: WeddingAnniversary,
       },
       where: { code: Code },
     })
@@ -41,6 +51,7 @@ export default class UpdateUserService {
       email: Email,
       charge: user.charge,
       birthday: user.birthday,
+      weddingAnniversary: user.weddingAnniversary,
     }
 
     prisma.$disconnect()

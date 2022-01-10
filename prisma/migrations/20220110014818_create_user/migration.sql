@@ -8,6 +8,7 @@ CREATE TABLE "User" (
     "email" TEXT NOT NULL,
     "charge" TEXT NOT NULL,
     "birthday" TEXT NOT NULL,
+    "weddingAnniversary" TEXT,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("code")
 );
