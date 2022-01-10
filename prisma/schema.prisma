@@ -21,3 +21,11 @@ model User {
   birthday String
   weddingAnniversary String?
 }
+
+model ScaleUsers {
+  code     String   @id
+  password String
+  name     String
+  email    String   @unique
+  departament String  
+}
