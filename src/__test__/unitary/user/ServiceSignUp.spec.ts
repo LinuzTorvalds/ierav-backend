@@ -1,5 +1,4 @@
 import { hash } from 'bcryptjs'
-import moment from 'moment'
 import SignUpUserService from '../../../services/user/SignUp'
 
 let signUpUserService: SignUpUserService
@@ -20,6 +19,7 @@ describe('Sign up user', () => {
       Password: passwordHash,
       Charge: 'membro',
       Birthday: '26-03-2003',
+      WeddingAnniversary: '26-03-2009',
     })
 
     expect(user).toHaveProperty('code')
@@ -34,6 +34,7 @@ describe('Sign up user', () => {
       Password: '123',
       Charge: 'membro',
       Birthday: '27-03-2003',
+      WeddingAnniversary: '26-03-2007',
     })
 
     await expect(
@@ -44,7 +45,8 @@ describe('Sign up user', () => {
         Email: 'testexisting@gmail.com',
         Password: '123',
         Charge: 'membro',
-        Birthday: '2003-03-26',
+        Birthday: '27-03-2003',
+        WeddingAnniversary: '26-03-2007',
       })
     ).rejects.toEqual(new Error('User already exists'))
   })

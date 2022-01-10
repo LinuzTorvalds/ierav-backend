@@ -48,8 +48,33 @@ export default class BirthdayList {
         }
       }
     }
+
+    let listUsersMarriage = []
+
+    for (let user of users) {
+      const weddingAnniversary = user.weddingAnniversary.substring(0, 5)
+
+      const start: string = sunday
+
+      const end: string = saturday
+
+      if (
+        weddingAnniversary.substring(3, 5) == start.substring(3, 5) ||
+        weddingAnniversary.substring(3, 5) == end.substring(3, 5)
+      ) {
+        if (
+          weddingAnniversary.substring(0, 2) >= start.substring(0, 2) &&
+          weddingAnniversary.substring(0, 2) <= end.substring(0, 2)
+        ) {
+          listUsersMarriage.push({ ...user })
+        }
+      }
+    }
+
+    let list = [listUsers, listUsersMarriage]
+
     prisma.$disconnect()
 
-    return listUsers
+    return list
   }
 }
