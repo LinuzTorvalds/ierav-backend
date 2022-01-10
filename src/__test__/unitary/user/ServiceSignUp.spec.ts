@@ -22,10 +22,6 @@ describe('Sign up user', () => {
       Birthday: '2003-03-26',
     })
 
-    var startofweek = moment().startOf('week').toDate()
-
-    console.log(startofweek.getDate())
-
     expect(user).toHaveProperty('code')
   })
 
@@ -37,7 +33,7 @@ describe('Sign up user', () => {
       Email: 'testexisting@gmail.com',
       Password: '123',
       Charge: 'membro',
-      Birthday: '2003-03-26',
+      Birthday: '2003-03-27',
     })
 
     await expect(
