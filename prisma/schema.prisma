@@ -10,7 +10,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
+model users {
   code     String   @id
   password String
   name     String
@@ -22,7 +22,7 @@ model User {
   weddingAnniversary String?
 }
 
-model ScaleUsers {
+model scale_users {
   code     String   @id
   password String
   name     String
