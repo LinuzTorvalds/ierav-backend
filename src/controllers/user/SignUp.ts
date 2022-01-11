@@ -3,8 +3,16 @@ import SignUpUserService from '../../services/user/SignUp'
 
 export default class SignUpUserControl {
   async handle(request: Request, response: Response) {
-    const { Name, Sex, MaritalStatus, Email, Password, Charge, Birthday } =
-      request.body
+    const {
+      Name,
+      Sex,
+      MaritalStatus,
+      Email,
+      Password,
+      Charge,
+      Birthday,
+      WeddingAnniversary,
+    } = request.body
 
     const signUpUserService = new SignUpUserService()
 
@@ -17,6 +25,7 @@ export default class SignUpUserControl {
         Password,
         Charge,
         Birthday,
+        WeddingAnniversary,
       })
       .finally()
 

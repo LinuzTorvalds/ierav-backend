@@ -4,7 +4,15 @@ import UpdateUserService from '../../services/user/Update'
 export default class UpdateUserControl {
   async handle(request: Request, response: Response) {
     const { Code } = request.params
-    const { Name, Sex, MaritalStatus, Email, Password, Birthday } = request.body
+    const {
+      Name,
+      Sex,
+      MaritalStatus,
+      Email,
+      Password,
+      Birthday,
+      WeddingAnniversary,
+    } = request.body
 
     const updateUserService = new UpdateUserService()
 
@@ -16,6 +24,7 @@ export default class UpdateUserControl {
         Email,
         Password,
         Birthday,
+        WeddingAnniversary,
       })
       .finally()
 

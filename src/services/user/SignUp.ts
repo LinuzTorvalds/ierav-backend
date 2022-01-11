@@ -28,7 +28,7 @@ export default class SignUpUserService {
 
     if (!Email) throw new Error('Email incorrect')
 
-    const userAlreadyExists = await prisma.user.findUnique({
+    const userAlreadyExists = await prisma.users.findUnique({
       where: { email: Email },
     })
 
@@ -36,7 +36,7 @@ export default class SignUpUserService {
 
     const passwordHash = await hash(Password, 8)
 
-    const user = await prisma.user.create({
+    const user = await prisma.users.create({
       data: {
         code: uuid(),
         name: Name,

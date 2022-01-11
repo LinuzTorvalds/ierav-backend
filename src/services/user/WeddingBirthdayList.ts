@@ -1,13 +1,13 @@
-import { PrismaClient, User } from '@prisma/client'
+import { PrismaClient, users } from '@prisma/client'
 import moment from 'moment'
 
 export default class WeddingBirthdayList {
   async execute() {
     const prisma = new PrismaClient()
 
-    let users: User[]
+    let users: users[]
 
-    users = await prisma.user.findMany()
+    users = await prisma.users.findMany()
 
     const today = new Date()
 

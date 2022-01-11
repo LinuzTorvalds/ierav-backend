@@ -30,7 +30,7 @@ export default class UpdateUserService {
 
     const passwordHash = await hash(Password, 8)
 
-    const user = await prisma.user.update({
+    const user = await prisma.users.update({
       data: {
         name: Name,
         sex: Sex,

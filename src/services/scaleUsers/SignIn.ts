@@ -6,11 +6,11 @@ type userRequest = {
   Password: string
 }
 
-export default class SignInUserService {
+export default class SignInScaleUserService {
   async execute({ Email, Password }: userRequest) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.users.findFirst({ where: { email: Email } })
+    const user = await prisma.scale_users.findFirst({ where: { email: Email } })
 
     if (!user) throw new Error('Login/Password incorrect')
 
@@ -21,11 +21,9 @@ export default class SignInUserService {
     const userFind = {
       code: user.code,
       name: user.name,
-      sex: user.sex,
-      maritalStatus: user.maritalStatus,
       email: user.email,
-      charge: user.charge,
-      birthday: user.birthday,
+      password: user.password,
+      departament: user.departament,
     }
 
     prisma.$disconnect()
