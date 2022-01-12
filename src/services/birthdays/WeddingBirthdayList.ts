@@ -5,9 +5,9 @@ export default class WeddingBirthdayList {
   async execute() {
     const prisma = new PrismaClient()
 
-    let users: users[]
+    let usersWedding: users[]
 
-    users = await prisma.users.findMany()
+    usersWedding = await prisma.users.findMany()
 
     const today = new Date()
 
@@ -29,7 +29,7 @@ export default class WeddingBirthdayList {
 
     let listUsersMarriage = []
 
-    for (let user of users) {
+    for (let user of usersWedding) {
       const weddingAnniversary = user.weddingAnniversary.substring(0, 5)
 
       const start: string = sunday

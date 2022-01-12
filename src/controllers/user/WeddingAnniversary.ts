@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import WeddingBirthdayUserService from '../../services/user/WeddingBirthday'
+import WeddingBirthdayUserService from '../../services/user/WeddingAnniversary'
 
 export default class WeddingBirthdayUserControl {
   async handle(request: Request, response: Response) {
@@ -9,7 +9,7 @@ export default class WeddingBirthdayUserControl {
 
     const user = await WeddingBirthday.execute(weddingBirthday).finally()
 
-    if (user == true) return response.json('0k')
+    if (user != false) return response.json(user)
     else return response.json('no')
   }
 }

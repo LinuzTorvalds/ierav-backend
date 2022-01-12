@@ -10,6 +10,7 @@ type userRequest = {
   Password: string
   Charge: string
   Birthday: string
+  Year: string
   WeddingAnniversary: string
 }
 
@@ -22,6 +23,7 @@ export default class SignUpUserService {
     Password,
     Charge,
     Birthday,
+    Year,
     WeddingAnniversary,
   }: userRequest) {
     const prisma = new PrismaClient()
@@ -46,6 +48,7 @@ export default class SignUpUserService {
         password: passwordHash,
         charge: Charge,
         birthday: Birthday,
+        year: Year,
         weddingAnniversary: WeddingAnniversary,
       },
     })
@@ -58,6 +61,7 @@ export default class SignUpUserService {
       email: Email,
       charge: user.charge,
       birthday: user.birthday,
+      year: user.year,
       weddingAnniversary: user.weddingAnniversary,
     }
 

@@ -21,11 +21,7 @@ export default class SignInUserService {
     const userFind = {
       code: user.code,
       name: user.name,
-      sex: user.sex,
-      maritalStatus: user.maritalStatus,
       email: user.email,
-      charge: user.charge,
-      birthday: user.birthday,
     }
 
     prisma.$disconnect()

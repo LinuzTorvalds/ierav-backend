@@ -6,9 +6,9 @@ import CreateUserControl from './controllers/user/SignUp'
 import SignInUserControl from './controllers/user/SignIn'
 import ReadUserControl from './controllers/user/Read'
 import BirthdayUserControl from './controllers/user/Birthday'
-import BirthdayListControl from './controllers/user/BirthdayList'
-import WeddingBirthdayUserControl from './controllers/user/WeddingBirthday'
-import WeddingBirthdayListControl from './controllers/user/WeddingBirthdayList'
+import BirthdayListControl from './controllers/birthdays/BirthdayList'
+import WeddingBirthdayUserControl from './controllers/user/WeddingAnniversary'
+import WeddingBirthdayListControl from './controllers/birthdays/WeddingBirthdayList'
 
 //scaleusers
 import UpdateScaleUserControl from './controllers/scaleUsers/Update'
