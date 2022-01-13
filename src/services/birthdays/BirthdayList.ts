@@ -88,15 +88,27 @@ export default class BirthdayListService {
           weddingAnniversary.substring(0, 2) >= start.substring(0, 2) &&
           weddingAnniversary.substring(0, 2) <= end.substring(0, 2)
         ) {
+          listBirthdays.map((a) => {
+            user
+          })
           listWeddingAnniversary.push({ ...user })
         }
       }
     }
 
+    let result = { listBirthdays: [], listWeddingAnniversary: [] }
+
+    result.listBirthdays = listBirthdays
+
+    result.listWeddingAnniversary = listWeddingAnniversary
+
     prisma.$disconnect()
 
-    if (listBirthdays.length == 0 && listWeddingAnniversary.length == 0)
+    if (
+      result.listBirthdays.length == 0 &&
+      result.listWeddingAnniversary.length == 0
+    )
       return null
-    else return listBirthdays
+    else return result
   }
 }

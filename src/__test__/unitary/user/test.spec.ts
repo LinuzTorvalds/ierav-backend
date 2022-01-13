@@ -1,15 +1,16 @@
-import { PrismaClient, User } from '@prisma/client'
+import { PrismaClient, birthdays, wedding_aniversary } from '@prisma/client'
 import moment from 'moment'
 
 describe('nada º~º', () => {
   it('test 0_0', async () => {
     const prisma = new PrismaClient()
 
-    let users: User[]
+    //Brithdays
+    let birthdays: birthdays[]
 
-    users = await prisma.user.findMany()
+    birthdays = await prisma.birthdays.findMany()
 
-    const today = new Date('03/20/2022')
+    const today = new Date()
 
     var sunday, saturday
 
@@ -27,9 +28,9 @@ describe('nada º~º', () => {
       sunday = moment(sunday).format('DD-MM')
     }
 
-    let listUsers = []
+    let listBirthdays = []
 
-    for (let user of users) {
+    for (let user of birthdays) {
       const birthday = user.birthday.substring(0, 5)
 
       const start: string = sunday
@@ -44,15 +45,36 @@ describe('nada º~º', () => {
           birthday.substring(0, 2) >= start.substring(0, 2) &&
           birthday.substring(0, 2) <= end.substring(0, 2)
         ) {
-          listUsers.push({ ...user })
+          listBirthdays.push({ ...user })
         }
       }
     }
 
-    let listUsersMarriage = []
+    //Wedding
+    let weddings_Aninversary: wedding_aniversary[]
 
-    for (let user of users) {
-      const weddingAnniversary = user.weddingAnniversary.substring(0, 5)
+    weddings_Aninversary = await prisma.wedding_aniversary.findMany()
+
+    var sunday, saturday
+
+    if (today.getDay() === 0) {
+      sunday = moment(today).format('DD-MM')
+
+      saturday = moment(today).add(6, 'days').format('DD-MM')
+    } else {
+      const days = 7 - today.getDay()
+
+      sunday = moment(today).add(days, 'days').toDate()
+
+      saturday = moment(sunday).add(6, 'days').format('DD-MM')
+
+      sunday = moment(sunday).format('DD-MM')
+    }
+
+    let listWeddingAnniversary = []
+
+    for (let user of weddings_Aninversary) {
+      const weddingAnniversary = user.birthday.substring(0, 5)
 
       const start: string = sunday
 
@@ -66,13 +88,21 @@ describe('nada º~º', () => {
           weddingAnniversary.substring(0, 2) >= start.substring(0, 2) &&
           weddingAnniversary.substring(0, 2) <= end.substring(0, 2)
         ) {
-          listUsersMarriage.push({ ...user })
+          listBirthdays.map((a) => {
+            user
+          })
+          listWeddingAnniversary.push({ ...user })
         }
       }
     }
 
-    let list = [listUsers, listUsersMarriage]
+    let result = { listBirthdays: [], listWeddingAnniversary: [] }
 
-    console.log(list)
+    result.listBirthdays = listBirthdays
+
+    result.listWeddingAnniversary = listWeddingAnniversary
+
+    console.log(result.listWeddingAnniversary[0]['code'])
+    console.log(result.listWeddingAnniversary[0]['year'])
   })
 })
