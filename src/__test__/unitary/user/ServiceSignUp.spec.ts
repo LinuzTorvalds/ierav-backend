@@ -18,8 +18,9 @@ describe('Sign up user', () => {
       Email: 'test@gmail.com',
       Password: passwordHash,
       Charge: 'membro',
-      Birthday: '26-03-2003',
-      WeddingAnniversary: '26-03-2009',
+      Birthday: '26-03',
+      WeddingAnniversary: '26-03',
+      Year: '2009',
     })
 
     expect(user).toHaveProperty('code')
@@ -33,8 +34,9 @@ describe('Sign up user', () => {
       Email: 'testexisting@gmail.com',
       Password: '123',
       Charge: 'membro',
-      Birthday: '27-03-2003',
-      WeddingAnniversary: '26-03-2007',
+      Birthday: '27-03',
+      WeddingAnniversary: '26-03',
+      Year: '2007',
     })
 
     await expect(
@@ -45,8 +47,9 @@ describe('Sign up user', () => {
         Email: 'testexisting@gmail.com',
         Password: '123',
         Charge: 'membro',
-        Birthday: '27-03-2003',
-        WeddingAnniversary: '26-03-2007',
+        Birthday: '27-03',
+        WeddingAnniversary: '26-03',
+        Year: '2007',
       })
     ).rejects.toEqual(new Error('User already exists'))
   })

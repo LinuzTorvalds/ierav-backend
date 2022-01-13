@@ -1,5 +1,8 @@
 import { PrismaClient, birthdays, wedding_aniversary } from '@prisma/client'
 import moment from 'moment'
+import xl from 'excel4node'
+const wb = new xl.Workbook()
+const ws = wb.addWorksheet('teste')
 
 describe('nada º~º', () => {
   it('test 0_0', async () => {
@@ -102,7 +105,34 @@ describe('nada º~º', () => {
 
     result.listWeddingAnniversary = listWeddingAnniversary
 
-    console.log(result.listWeddingAnniversary[0]['code'])
-    console.log(result.listWeddingAnniversary[0]['year'])
+    ws.cell(1, 1).string('Aniversários')
+
+    const headingColumnNames = ['code', 'name', 'birthday', 'year']
+
+    let headingColumnIndex = 1
+    headingColumnNames.forEach((heading) => {
+      ws.cell(2, headingColumnIndex++).string(heading)
+    })
+
+    let rowIndex = 3
+    result.listBirthdays.forEach((record) => {
+      let columnIndex = 1
+      Object.keys(record).forEach((columnName) => {
+        ws.cell(rowIndex, columnIndex++).string(record[columnName])
+      })
+      rowIndex++
+    })
+
+    ws.cell(rowIndex++, 1).string('Bodas')
+
+    result.listWeddingAnniversary.forEach((record) => {
+      let columnIndex = 1
+      Object.keys(record).forEach((columnName) => {
+        ws.cell(rowIndex, columnIndex++).string(record[columnName])
+      })
+      rowIndex++
+    })
+
+    wb.write('file.xlsx')
   })
 })
