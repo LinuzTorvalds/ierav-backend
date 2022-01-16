@@ -41,3 +41,8 @@ model wedding_aniversary {
   birthday String
   year     String
 }
+
+model wedding {
+  year     String @id
+  description String
+}
