@@ -1,4 +1,9 @@
-import { PrismaClient, birthdays, wedding_aniversary } from '@prisma/client'
+import {
+  PrismaClient,
+  birthdays,
+  wedding_aniversary,
+  wedding,
+} from '@prisma/client'
 import moment from 'moment'
 import xl from 'excel4node'
 const wb = new xl.Workbook()
@@ -91,10 +96,19 @@ describe('nada º~º', () => {
           weddingAnniversary.substring(0, 2) >= start.substring(0, 2) &&
           weddingAnniversary.substring(0, 2) <= end.substring(0, 2)
         ) {
-          listBirthdays.map((a) => {
-            user
-          })
-          listWeddingAnniversary.push({ ...user })
+          user.year = moment(today).subtract(user.year, 'year').format('YYYY')
+          let data: wedding
+          if (user.year.substring(0, 2) === '00')
+            data = await prisma.wedding.findFirst({
+              where: { year: user.year.substring(2, 4) },
+            })
+          else
+            data = await prisma.wedding.findFirst({
+              where: { year: user.year.substring(1, 4) },
+            })
+          const wedding = data.description
+          user.year = data.year
+          listWeddingAnniversary.push({ ...user, wedding })
         }
       }
     }
@@ -105,31 +119,45 @@ describe('nada º~º', () => {
 
     result.listWeddingAnniversary = listWeddingAnniversary
 
-    ws.cell(1, 1).string('Aniversários')
+    console.log(result.listWeddingAnniversary)
 
-    const headingColumnNames = ['code', 'name', 'birthday', 'year']
+    // export data for archive .xlsx
+
+    ws.cell(1, 1).string('Aniversários natalicios')
+
+    const headingColumnNames0 = ['nome', 'data']
 
     let headingColumnIndex = 1
-    headingColumnNames.forEach((heading) => {
-      ws.cell(2, headingColumnIndex++).string(heading)
+    headingColumnNames0.forEach((heading) => {
+      ws.cell(3, headingColumnIndex++).string(heading)
     })
 
-    let rowIndex = 3
+    let rowIndex = 4
     result.listBirthdays.forEach((record) => {
       let columnIndex = 1
-      Object.keys(record).forEach((columnName) => {
-        ws.cell(rowIndex, columnIndex++).string(record[columnName])
-      })
+      ws.cell(rowIndex, columnIndex++).string(record.name)
+      ws.cell(rowIndex, columnIndex++).string(record.birthday)
       rowIndex++
     })
+    rowIndex++
 
-    ws.cell(rowIndex++, 1).string('Bodas')
+    ws.cell(rowIndex++, 1).string('Aniversários de casamento')
 
+    const headingColumnNames1 = ['nome', 'data', 'anos', 'bodas']
+
+    rowIndex++
+    headingColumnIndex = 1
+    headingColumnNames1.forEach((heading) => {
+      ws.cell(rowIndex, headingColumnIndex++).string(heading)
+    })
+
+    rowIndex++
     result.listWeddingAnniversary.forEach((record) => {
       let columnIndex = 1
-      Object.keys(record).forEach((columnName) => {
-        ws.cell(rowIndex, columnIndex++).string(record[columnName])
-      })
+      ws.cell(rowIndex, columnIndex++).string(record.name)
+      ws.cell(rowIndex, columnIndex++).string(record.birthday)
+      ws.cell(rowIndex, columnIndex++).string(record.year)
+      ws.cell(rowIndex, columnIndex++).string(record.wedding)
       rowIndex++
     })
 
