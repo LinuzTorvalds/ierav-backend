@@ -12,6 +12,7 @@ export default class SignUpUserControl {
       Charge,
       Birthday,
       WeddingAnniversary,
+      Year,
     } = request.body
 
     const signUpUserService = new SignUpUserService()
@@ -26,6 +27,7 @@ export default class SignUpUserControl {
         Charge,
         Birthday,
         WeddingAnniversary,
+        Year,
       })
       .finally()
 
