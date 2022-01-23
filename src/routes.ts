@@ -8,7 +8,6 @@ import ReadUserControl from './controllers/user/Read'
 import BirthdayUserControl from './controllers/user/Birthday'
 import BirthdayListControl from './controllers/birthdays/BirthdayList'
 import WeddingBirthdayUserControl from './controllers/user/WeddingAnniversary'
-import WeddingBirthdayListControl from './controllers/birthdays/WeddingBirthdayList'
 
 //scaleusers
 import UpdateScaleUserControl from './controllers/scaleUsers/Update'
@@ -26,7 +25,6 @@ const readUserControl = new ReadUserControl()
 const birthdayUserControl = new BirthdayUserControl()
 const birthdayListControl = new BirthdayListControl()
 const weddingBirthdayUserControl = new WeddingBirthdayUserControl()
-const weddingBirthdayListControl = new WeddingBirthdayListControl()
 
 //scaleusers
 const updateScaleUserControl = new UpdateScaleUserControl()
@@ -42,7 +40,6 @@ router.post('/signin', signInUserControl.handle)
 router.get('/birthday/:Birthday', birthdayUserControl.handle)
 router.get('/birthdaylist', birthdayListControl.handle)
 router.get('/wedding/:wedding', weddingBirthdayUserControl.handle)
-router.get('/wedding', weddingBirthdayListControl.handle)
 
 //scaleusers
 router.put('/scaleuser/:Code', updateScaleUserControl.handle)
