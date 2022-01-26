@@ -27,6 +27,9 @@ const updateScaleUserControl = new Update_2.default();
 const createScaleUserControl = new SignUp_2.default();
 const signInScaleUserControl = new SignIn_2.default();
 const readScaleUserControl = new Read_2.default();
+router.get('/test', (request, response) => {
+    response.send(`Ready \^o^/`);
+});
 router.put('/user/:Code', updateUserControl.handle);
 router.get('/user/:Email', readUserControl.handle);
 router.post('/signup', createUserControl.handle);
