@@ -1,4 +1,4 @@
-import { Router } from 'express'
+import { Request, request, Response, response, Router } from 'express'
 
 // users
 import UpdateUserControl from './controllers/user/Update'
@@ -31,6 +31,11 @@ const updateScaleUserControl = new UpdateScaleUserControl()
 const createScaleUserControl = new CreateScaleUserControl()
 const signInScaleUserControl = new SignInScaleUserControl()
 const readScaleUserControl = new ReadScaleUserControl()
+
+//test
+router.get('/test', (request: Request, response: Response) => {
+  response.send(`Ready \^o^/`)
+})
 
 //users
 router.put('/user/:Code', updateUserControl.handle)
