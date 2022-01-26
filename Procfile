@@ -1,1 +1,1 @@
-web: yran start
+web: yarn start
