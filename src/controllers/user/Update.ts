@@ -12,7 +12,6 @@ export default class UpdateUserControl {
       Password,
       Birthday,
       WeddingAnniversary,
-      Year,
     } = request.body
 
     const updateUserService = new UpdateUserService()
@@ -26,7 +25,6 @@ export default class UpdateUserControl {
         Password,
         Birthday,
         WeddingAnniversary,
-        Year,
       })
       .finally()
 

@@ -3,20 +3,18 @@ import { v4 as uuid } from 'uuid'
 
 type userRequest = {
   Name: string
-  Birthday: string
-  Year: string
+  Birthday: Date
 }
 
 export default class CreateWeddingService {
-  async execute({ Name, Birthday, Year }: userRequest) {
+  async execute({ Name, Birthday }: userRequest) {
     const prisma = new PrismaClient()
 
     const user = await prisma.wedding_aniversary.create({
       data: {
         code: uuid(),
         name: Name,
-        birthday: Birthday,
-        year: Year,
+        birthday: new Date(Birthday),
       },
     })
 
@@ -24,7 +22,6 @@ export default class CreateWeddingService {
       code: user.code,
       name: user.name,
       birthday: user.birthday,
-      year: user.year,
     }
 
     prisma.$disconnect()

@@ -3,11 +3,11 @@ import BirthdayUserService from '../../services/user/Birthday'
 
 export default class BirthdayUserControl {
   async handle(request: Request, response: Response) {
-    const { Birthday } = request.params
+    const { Code } = request.params
 
     const birthday = new BirthdayUserService()
 
-    const user = await birthday.execute(Birthday).finally()
+    const user = await birthday.execute(Code).finally()
 
     if (user == true) return response.json('0k')
     else return response.json('no')

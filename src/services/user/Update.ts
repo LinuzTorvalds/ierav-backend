@@ -7,9 +7,8 @@ type userRequest = {
   MaritalStatus: string
   Email: string
   Password: string
-  Birthday: string
-  Year: string
-  WeddingAnniversary: string
+  Birthday: Date
+  WeddingAnniversary?: Date
 }
 
 export default class UpdateUserService {
@@ -22,7 +21,6 @@ export default class UpdateUserService {
       Email,
       Password,
       Birthday,
-      Year,
       WeddingAnniversary,
     }: userRequest
   ) {
@@ -39,9 +37,8 @@ export default class UpdateUserService {
         maritalStatus: MaritalStatus,
         email: Email,
         password: passwordHash,
-        birthday: Birthday,
-        year: Year,
-        weddingAnniversary: WeddingAnniversary,
+        birthday: new Date(Birthday),
+        weddingAnniversary: new Date(WeddingAnniversary),
       },
       where: { code: Code },
     })
@@ -54,7 +51,6 @@ export default class UpdateUserService {
       email: Email,
       charge: user.charge,
       birthday: user.birthday,
-      year: user.year,
       weddingAnniversary: user.weddingAnniversary,
     }
 

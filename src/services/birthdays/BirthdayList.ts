@@ -6,7 +6,9 @@ import {
 } from '@prisma/client'
 import moment from 'moment'
 import xl from 'excel4node'
-const wb = new xl.Workbook()
+const wb = new xl.Workbook({
+  dateFormat: 'dd-mm-yyyy',
+})
 const ws = wb.addWorksheet('teste')
 
 export default class BirthdayListService {
@@ -39,7 +41,7 @@ export default class BirthdayListService {
     let listBirthdays = []
 
     for (let user of birthdays) {
-      const birthday = user.birthday.substring(0, 5)
+      const birthday = moment(user.birthday).add(1, 'days').format('DD-MM-YYYY')
 
       const start: string = sunday
 
@@ -63,31 +65,16 @@ export default class BirthdayListService {
 
     weddings_Aninversary = await prisma.wedding_aniversary.findMany()
 
-    var sunday, saturday
-
-    if (today.getDay() === 0) {
-      sunday = moment(today).format('DD-MM')
-
-      saturday = moment(today).add(6, 'days').format('DD-MM')
-    } else {
-      const days = 7 - today.getDay()
-
-      sunday = moment(today).add(days, 'days').toDate()
-
-      saturday = moment(sunday).add(6, 'days').format('DD-MM')
-
-      sunday = moment(sunday).format('DD-MM')
-    }
-
     let listWeddingAnniversary = []
 
     for (let user of weddings_Aninversary) {
-      const weddingAnniversary = user.birthday.substring(0, 5)
+      const weddingAnniversary = moment(user.birthday)
+        .add(1, 'days')
+        .format('DD-MM-YYYY')
 
       const start: string = sunday
 
       const end: string = saturday
-
       if (
         weddingAnniversary.substring(3, 5) == start.substring(3, 5) ||
         weddingAnniversary.substring(3, 5) == end.substring(3, 5)
@@ -96,19 +83,21 @@ export default class BirthdayListService {
           weddingAnniversary.substring(0, 2) >= start.substring(0, 2) &&
           weddingAnniversary.substring(0, 2) <= end.substring(0, 2)
         ) {
-          user.year = moment(today).subtract(user.year, 'year').format('YYYY')
+          let year = moment(today)
+            .subtract(weddingAnniversary.substring(6, 10), 'year')
+            .format('YYYY')
           let data: wedding
-          if (user.year.substring(0, 2) === '00')
+          if (year.substring(0, 2) === '00')
             data = await prisma.wedding.findFirst({
-              where: { year: user.year.substring(2, 4) },
+              where: { year: year.substring(2, 4) },
             })
           else
             data = await prisma.wedding.findFirst({
-              where: { year: user.year.substring(1, 4) },
+              where: { year: year.substring(1, 4) },
             })
           const wedding = data.description
-          user.year = data.year
-          listWeddingAnniversary.push({ ...user, wedding })
+          year = data.year
+          listWeddingAnniversary.push({ ...user, wedding, year })
         }
       }
     }
@@ -134,7 +123,7 @@ export default class BirthdayListService {
     result.listBirthdays.forEach((record) => {
       let columnIndex = 1
       ws.cell(rowIndex, columnIndex++).string(record.name)
-      ws.cell(rowIndex, columnIndex++).string(record.birthday)
+      ws.cell(rowIndex, columnIndex++).date(record.birthday)
       rowIndex++
     })
     rowIndex++
@@ -153,7 +142,7 @@ export default class BirthdayListService {
     result.listWeddingAnniversary.forEach((record) => {
       let columnIndex = 1
       ws.cell(rowIndex, columnIndex++).string(record.name)
-      ws.cell(rowIndex, columnIndex++).string(record.birthday)
+      ws.cell(rowIndex, columnIndex++).date(record.birthday)
       ws.cell(rowIndex, columnIndex++).string(record.year)
       ws.cell(rowIndex, columnIndex++).string(record.wedding)
       rowIndex++

@@ -11,7 +11,11 @@ export default class WeddingBirthdayUserService {
 
     const dateCompare = moment(today).format('DD-MM')
 
-    if (dateCompare != user.weddingAnniversary.substring(0, 5)) return false
+    if (
+      dateCompare !=
+      moment(user.weddingAnniversary).add(1, 'days').format('DD-MM')
+    )
+      return false
 
     const info = prisma.wedding_aniversary.findFirst({
       where: { name: user.name },

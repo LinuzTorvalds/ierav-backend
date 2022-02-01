@@ -11,7 +11,8 @@ export default class BirthdayUserService {
 
     const dateCompare = moment(today).format('DD-MM')
 
-    if (dateCompare != user.birthday.substring(0, 5)) return false
+    if (dateCompare != moment(user.birthday).add(1, 'days').format('DD-MM'))
+      return false
 
     return true
   }

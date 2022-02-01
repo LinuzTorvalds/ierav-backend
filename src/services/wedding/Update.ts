@@ -2,12 +2,11 @@ import { PrismaClient } from '@prisma/client'
 
 type userRequest = {
   Name: string
-  Birthday: string
-  Year: string
+  Birthday: Date
 }
 
 export default class UpdateBirthdayService {
-  async execute(Code: string, { Name, Birthday, Year }: userRequest) {
+  async execute(Code: string, { Name, Birthday }: userRequest) {
     const prisma = new PrismaClient()
 
     if (!Code) throw new Error('Code incorrect')
@@ -15,8 +14,7 @@ export default class UpdateBirthdayService {
     const user = await prisma.wedding_aniversary.update({
       data: {
         name: Name,
-        birthday: Birthday,
-        year: Year,
+        birthday: new Date(Birthday),
       },
       where: { code: Code },
     })
@@ -25,7 +23,6 @@ export default class UpdateBirthdayService {
       code: user.code,
       name: user.name,
       birthday: user.birthday,
-      year: user.year,
     }
 
     prisma.$disconnect()
