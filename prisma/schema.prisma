@@ -15,9 +15,8 @@ model users {
   maritalStatus String
   email    String   @unique
   charge   String
-  birthday String
-  year     String
-  weddingAnniversary String?
+  birthday DateTime @db.Date
+  weddingAnniversary  DateTime @db.Date
 }
 
 model scale_users {
@@ -31,15 +30,13 @@ model scale_users {
 model birthdays {
   code     String @id
   name     String
-  birthday String
-  year     String
+  birthday DateTime @db.Date
 }
 
 model wedding_aniversary {
   code     String @id
   name     String
-  birthday String
-  year     String
+  birthday DateTime @db.Date
 }
 
 model wedding {
