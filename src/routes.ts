@@ -55,12 +55,12 @@ router.get('/', (request: Request, response: Response) => {
 
 //aniversary
 router.get('/birthdaylist', birthdayListControl.handle)
-router.post('birthday/create', createBirthdayControl.handle)
-router.post('birthday/update/:Code', updateBirhtdayControl.handle)
-router.post('wedding/create', createWeddingControl.handle)
-router.post('wedding/update/:Code', updateWeddingControl.handle)
-router.post('weddings/create', createWeddingsControl.handle)
-router.post('weddings/update/:Year', updateWeddingsControl.handle)
+router.post('/birthday/create', createBirthdayControl.handle)
+router.put('/birthday/update/:Code', updateBirhtdayControl.handle)
+router.post('/wedding/create', createWeddingControl.handle)
+router.put('/wedding/update/:Code', updateWeddingControl.handle)
+router.post('/weddings/create', createWeddingsControl.handle)
+router.put('/weddings/update/:Year', updateWeddingsControl.handle)
 
 //users
 router.put('/user/:Code', updateUserControl.handle)
