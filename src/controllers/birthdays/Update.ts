@@ -4,12 +4,12 @@ import UpdateBirthdayService from '../../services/birthdays/Update'
 export default class UpdateBirthdayControl {
   async handle(request: Request, response: Response) {
     const { Code } = request.params
-    const { Birthday, Name, Year } = request.body
+    const { Birthday, Name } = request.body
 
     const updateBirthdayService = new UpdateBirthdayService()
 
     const wedding = await updateBirthdayService
-      .execute(Code, { Birthday, Name, Year })
+      .execute(Code, { Birthday, Name })
       .finally()
 
     return response.json(wedding)
