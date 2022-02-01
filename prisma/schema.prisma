@@ -16,7 +16,7 @@ model users {
   email    String   @unique
   charge   String
   birthday DateTime @db.Date
-  weddingAnniversary  DateTime @db.Date
+  weddingAnniversary  DateTime? @db.Date
 }
 
 model scale_users {
