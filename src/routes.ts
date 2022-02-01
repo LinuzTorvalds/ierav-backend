@@ -67,8 +67,8 @@ router.put('/user/:Code', updateUserControl.handle)
 router.get('/user/:Email', readUserControl.handle)
 router.post('/signup', createUserControl.handle)
 router.post('/signin', signInUserControl.handle)
-router.get('/birthday/:Birthday', birthdayUserControl.handle)
-router.get('/wedding/:wedding', weddingBirthdayUserControl.handle)
+router.get('/birthday/:Code', birthdayUserControl.handle)
+router.get('/wedding/:Code', weddingBirthdayUserControl.handle)
 
 //scaleusers
 router.put('/scaleuser/:Code', updateScaleUserControl.handle)
