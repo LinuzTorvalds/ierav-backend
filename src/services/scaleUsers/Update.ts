@@ -17,12 +17,6 @@ export default class UpdateScaleUserService {
 
     if (!Email) throw new Error('Email incorrect')
 
-    const userAlreadyExists = await prisma.scale_users.findUnique({
-      where: { email: Email },
-    })
-
-    if (userAlreadyExists) throw new Error('User already exists')
-
     const passwordHash = await hash(Password, 8)
 
     const user = await prisma.scale_users.update({
