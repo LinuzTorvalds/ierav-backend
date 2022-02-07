@@ -1,0 +1,20 @@
+FROM node:alpine
+
+ENV PORT=3001
+ENV DATABASE_URL=postgresql://user:password@172.21.0.2:5432/ieravbackend?schema=public
+
+WORKDIR /usr/app
+
+COPY package.json yarn.lock ./
+
+RUN yarn
+
+COPY . .
+
+RUN yarn prisma generate
+
+RUN yarn build
+
+EXPOSE ${PORT}
+
+CMD yarn start
