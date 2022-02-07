@@ -63,12 +63,12 @@ router.post('/weddings/create', createWeddingsControl.handle)
 router.put('/weddings/update/:Year', updateWeddingsControl.handle)
 
 //users
-router.put('/user/:Code', updateUserControl.handle)
-router.get('/user/:Email', readUserControl.handle)
-router.post('/signup', createUserControl.handle)
-router.post('/signin', signInUserControl.handle)
-router.get('/birthday/:Code', birthdayUserControl.handle)
-router.get('/wedding/:Code', weddingBirthdayUserControl.handle)
+router.put('/users/:Code', updateUserControl.handle)
+router.get('/users/:Email', readUserControl.handle)
+router.post('/users/signup', createUserControl.handle)
+router.post('/users/signin', signInUserControl.handle)
+router.get('/users/birthday/:Code', birthdayUserControl.handle)
+router.get('/users/wedding/:Code', weddingBirthdayUserControl.handle)
 
 //scaleusers
 router.put('/scaleuser/:Code', updateScaleUserControl.handle)
