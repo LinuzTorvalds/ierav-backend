@@ -10,12 +10,12 @@ import CreateWeddingsControl from './controllers/wedding/CreateWeddings'
 import UpdateWeddingsControl from './controllers/wedding/UpdateWeddings'
 
 // users
-import UpdateUserControl from './controllers/user/Update'
-import CreateUserControl from './controllers/user/SignUp'
-import SignInUserControl from './controllers/user/SignIn'
-import ReadUserControl from './controllers/user/Read'
-import BirthdayUserControl from './controllers/user/Birthday'
-import WeddingBirthdayUserControl from './controllers/user/WeddingAnniversary'
+import UpdateUserControl from './controllers/users/Update'
+import CreateUserControl from './controllers/users/SignUp'
+import SignInUserControl from './controllers/users/SignIn'
+import ReadUserControl from './controllers/users/Read'
+import BirthdayUserControl from './controllers/users/Birthday'
+import WeddingBirthdayUserControl from './controllers/users/WeddingAnniversary'
 
 //scaleusers
 import UpdateScaleUserControl from './controllers/scaleUsers/Update'
