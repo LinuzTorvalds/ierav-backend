@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import ReadUserService from '../../services/user/Read'
+import ReadUserService from '../../services/users/Read'
 
 export default class ReadUserControl {
   async handle(request: Request, response: Response) {

@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import WeddingBirthdayUserService from '../../services/user/WeddingAnniversary'
+import WeddingBirthdayUserService from '../../services/users/WeddingAnniversary'
 
 export default class WeddingBirthdayUserControl {
   async handle(request: Request, response: Response) {

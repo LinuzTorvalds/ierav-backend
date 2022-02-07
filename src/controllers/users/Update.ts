@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import UpdateUserService from '../../services/user/Update'
+import UpdateUserService from '../../services/users/Update'
 
 export default class UpdateUserControl {
   async handle(request: Request, response: Response) {

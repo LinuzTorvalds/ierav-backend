@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import SignUpUserService from '../../services/user/SignUp'
+import SignUpUserService from '../../services/users/SignUp'
 
 export default class SignUpUserControl {
   async handle(request: Request, response: Response) {
