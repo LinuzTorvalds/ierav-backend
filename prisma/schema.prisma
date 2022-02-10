@@ -17,6 +17,7 @@ model users {
   charge   String
   birthday DateTime @db.Date
   weddingAnniversary  DateTime? @db.Date
+  token     String?
 }
 
 model scale_users {
