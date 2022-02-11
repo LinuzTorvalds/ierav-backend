@@ -17,7 +17,7 @@ import ReadUserControl from './controllers/users/Read'
 import BirthdayUserControl from './controllers/users/Birthday'
 import WeddingBirthdayUserControl from './controllers/users/WeddingAnniversary'
 import CreateTokenUserControl from './controllers/users/CreateToken'
-import KeepConectUserControl from './controllers/users/KeepConect'
+import KeepConnectUserControl from './controllers/users/KeepConnect'
 import DeleteTokenUserControl from './controllers/users/DeleteToken'
 
 //scaleusers
@@ -45,7 +45,7 @@ const readUserControl = new ReadUserControl()
 const birthdayUserControl = new BirthdayUserControl()
 const weddingBirthdayUserControl = new WeddingBirthdayUserControl()
 const createTokenUserControl = new CreateTokenUserControl()
-const keepConectUserControl = new KeepConectUserControl()
+const keepConnectUserControl = new KeepConnectUserControl()
 const deleteTokenUserControl = new DeleteTokenUserControl()
 
 //scaleusers
@@ -76,7 +76,7 @@ router.post('/users/signin', signInUserControl.handle)
 router.get('/users/birthday/:Code', birthdayUserControl.handle)
 router.get('/users/wedding/:Code', weddingBirthdayUserControl.handle)
 router.post('/users/createtoken', createTokenUserControl.handle)
-router.post('/users/keepconect', keepConectUserControl.handle)
+router.post('/users/keepconnect', keepConnectUserControl.handle)
 router.post('/users/deletetoken', deleteTokenUserControl.handle)
 
 //scaleusers

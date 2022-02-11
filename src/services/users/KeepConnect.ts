@@ -3,7 +3,7 @@ import { PrismaClient } from '@prisma/client'
 type userRequest = {
   Token: string
 }
-export default class KeepConectService {
+export default class KeepConnectService {
   async execute({ Token }: userRequest) {
     const prisma = new PrismaClient()
 
