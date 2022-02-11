@@ -8,22 +8,19 @@ export default class CreateTokenService {
   async execute({ Email }: userRequest) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.users.update({
-      data: {
-        token: uuid(),
-      },
-      where: { email: Email },
-    })
+    const user = await prisma.users
+      .update({
+        data: {
+          token: uuid(),
+        },
+        where: { email: Email },
+      })
+      .finally(() => prisma.$disconnect())
 
-    const userFind = {
-      code: user.code,
-      name: user.name,
-      email: user.email,
+    const userToken = {
       token: user.token,
     }
 
-    prisma.$disconnect()
-
-    return userFind
+    return userToken
   }
 }

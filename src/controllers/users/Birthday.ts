@@ -7,7 +7,7 @@ export default class BirthdayUserControl {
 
     const birthday = new BirthdayUserService()
 
-    const user = await birthday.execute(Code).finally()
+    const user = await birthday.execute(Code)
 
     if (user == true) return response.json('0k')
     else return response.json('no')

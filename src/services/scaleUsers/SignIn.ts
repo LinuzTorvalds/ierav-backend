@@ -10,7 +10,9 @@ export default class SignInScaleUserService {
   async execute({ Email, Password }: userRequest) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.scale_users.findFirst({ where: { email: Email } })
+    const user = await prisma.scale_users
+      .findFirst({ where: { email: Email } })
+      .finally(() => prisma.$disconnect())
 
     if (!user) throw new Error('Login/Password incorrect')
 
@@ -19,14 +21,10 @@ export default class SignInScaleUserService {
     if (!passwordMatch) throw new Error('Login/Password incorrect')
 
     const userFind = {
-      code: user.code,
       name: user.name,
       email: user.email,
-      password: user.password,
       departament: user.departament,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

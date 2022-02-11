@@ -7,9 +7,7 @@ export default class CreateBirthdayControl {
 
     const createBirthdayService = new CreateBirthdayService()
 
-    const birthday = await createBirthdayService
-      .execute({ Birthday, Name })
-      .finally()
+    const birthday = await createBirthdayService.execute({ Birthday, Name })
 
     return response.json(birthday)
   }

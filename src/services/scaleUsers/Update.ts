@@ -19,24 +19,23 @@ export default class UpdateScaleUserService {
 
     const passwordHash = await hash(Password, 8)
 
-    const user = await prisma.scale_users.update({
-      data: {
-        name: Name,
-        email: Email,
-        password: passwordHash,
-        departament: Departament,
-      },
-      where: { code: Code },
-    })
+    const user = await prisma.scale_users
+      .update({
+        data: {
+          name: Name,
+          email: Email,
+          password: passwordHash,
+          departament: Departament,
+        },
+        where: { code: Code },
+      })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
-      code: user.code,
       name: user.name,
       email: Email,
       depaetament: Departament,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

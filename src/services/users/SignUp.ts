@@ -36,19 +36,21 @@ export default class SignUpUserService {
 
     const passwordHash = await hash(Password, 8)
 
-    const user = await prisma.users.create({
-      data: {
-        code: uuid(),
-        name: Name,
-        sex: Sex,
-        maritalStatus: MaritalStatus,
-        email: Email,
-        password: passwordHash,
-        charge: Charge,
-        birthday: new Date(Birthday),
-        weddingAnniversary: new Date(WeddingAnniversary),
-      },
-    })
+    const user = await prisma.users
+      .create({
+        data: {
+          code: uuid(),
+          name: Name,
+          sex: Sex,
+          maritalStatus: MaritalStatus,
+          email: Email,
+          password: passwordHash,
+          charge: Charge,
+          birthday: new Date(Birthday),
+          weddingAnniversary: new Date(WeddingAnniversary),
+        },
+      })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
       code: user.code,
@@ -60,8 +62,6 @@ export default class SignUpUserService {
       birthday: user.birthday,
       weddingAnniversary: user.weddingAnniversary,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

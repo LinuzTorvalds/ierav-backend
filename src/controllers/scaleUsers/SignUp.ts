@@ -7,14 +7,12 @@ export default class SignUpScaleUserControl {
 
     const signUpScaleUserService = new SignUpScaleUserService()
 
-    const user = await signUpScaleUserService
-      .execute({
-        Name,
-        Email,
-        Password,
-        Departament,
-      })
-      .finally()
+    const user = await signUpScaleUserService.execute({
+      Name,
+      Email,
+      Password,
+      Departament,
+    })
 
     return response.json(user)
   }

@@ -7,7 +7,7 @@ export default class ReadUserControl {
 
     const readUserService = new ReadUserService()
 
-    const user = await readUserService.execute(Email).finally()
+    const user = await readUserService.execute(Email)
 
     return response.json(user)
   }

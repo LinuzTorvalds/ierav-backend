@@ -9,14 +9,14 @@ export default class CreateWeddingsService {
   async execute({ Year, Description }: wedding) {
     const prisma = new PrismaClient()
 
-    const wedding = await prisma.wedding.create({
-      data: {
-        year: Year,
-        description: Description,
-      },
-    })
-
-    prisma.$disconnect()
+    const wedding = await prisma.wedding
+      .create({
+        data: {
+          year: Year,
+          description: Description,
+        },
+      })
+      .finally(() => prisma.$disconnect())
 
     return wedding
   }

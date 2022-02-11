@@ -8,14 +8,12 @@ export default class UpdateUserControl {
 
     const updateScaleUserService = new UpdateScaleUserService()
 
-    await updateScaleUserService
-      .execute(Code, {
-        Name,
-        Email,
-        Password,
-        Departament,
-      })
-      .finally()
+    await updateScaleUserService.execute(Code, {
+      Name,
+      Email,
+      Password,
+      Departament,
+    })
 
     return response.status(201).send('successfully updated :D')
   }

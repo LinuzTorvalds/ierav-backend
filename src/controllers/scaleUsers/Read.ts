@@ -7,7 +7,7 @@ export default class ReadScaleUserControl {
 
     const readScaleUserService = new ReadScaleUserService()
 
-    const user = await readScaleUserService.execute(Email).finally()
+    const user = await readScaleUserService.execute(Email)
 
     return response.json(user)
   }

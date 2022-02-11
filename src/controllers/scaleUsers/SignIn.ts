@@ -7,9 +7,7 @@ export default class SignInScaleUserControl {
 
     const signInScaleUserService = new SignInScaleUserService()
 
-    const user = await signInScaleUserService
-      .execute({ Email, Password })
-      .finally()
+    const user = await signInScaleUserService.execute({ Email, Password })
 
     return response.json(user)
   }

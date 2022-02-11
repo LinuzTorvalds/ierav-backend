@@ -5,7 +5,9 @@ export default class WeddingBirthdayUserService {
   async execute(Code: string) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.users.findFirst({ where: { code: Code } })
+    const user = await prisma.users
+      .findFirst({ where: { code: Code } })
+      .finally(() => prisma.$disconnect())
 
     const today = new Date()
 
@@ -17,9 +19,11 @@ export default class WeddingBirthdayUserService {
     )
       return false
 
-    const info = prisma.wedding_aniversary.findFirst({
-      where: { name: user.name },
-    })
+    const info = prisma.wedding_aniversary
+      .findFirst({
+        where: { name: user.name },
+      })
+      .finally(() => prisma.$disconnect())
 
     return info
   }

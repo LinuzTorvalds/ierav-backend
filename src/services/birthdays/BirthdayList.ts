@@ -18,7 +18,9 @@ export default class BirthdayListService {
     //Brithdays
     let birthdays: birthdays[]
 
-    birthdays = await prisma.birthdays.findMany()
+    birthdays = await prisma.birthdays
+      .findMany()
+      .finally(() => prisma.$disconnect())
 
     const today = new Date()
 
@@ -88,13 +90,17 @@ export default class BirthdayListService {
             .format('YYYY')
           let data: wedding
           if (year.substring(0, 2) === '00')
-            data = await prisma.wedding.findFirst({
-              where: { year: year.substring(2, 4) },
-            })
+            data = await prisma.wedding
+              .findFirst({
+                where: { year: year.substring(2, 4) },
+              })
+              .finally(() => prisma.$disconnect())
           else
-            data = await prisma.wedding.findFirst({
-              where: { year: year.substring(1, 4) },
-            })
+            data = await prisma.wedding
+              .findFirst({
+                where: { year: year.substring(1, 4) },
+              })
+              .finally(() => prisma.$disconnect())
           const wedding = data.description
           year = data.year
           listWeddingAnniversary.push({ ...user, wedding, year })

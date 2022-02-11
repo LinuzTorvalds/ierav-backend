@@ -30,18 +30,20 @@ export default class UpdateUserService {
 
     const passwordHash = await hash(Password, 8)
 
-    const user = await prisma.users.update({
-      data: {
-        name: Name,
-        sex: Sex,
-        maritalStatus: MaritalStatus,
-        email: Email,
-        password: passwordHash,
-        birthday: new Date(Birthday),
-        weddingAnniversary: new Date(WeddingAnniversary),
-      },
-      where: { code: Code },
-    })
+    const user = await prisma.users
+      .update({
+        data: {
+          name: Name,
+          sex: Sex,
+          maritalStatus: MaritalStatus,
+          email: Email,
+          password: passwordHash,
+          birthday: new Date(Birthday),
+          weddingAnniversary: new Date(WeddingAnniversary),
+        },
+        where: { code: Code },
+      })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
       code: user.code,
@@ -53,8 +55,6 @@ export default class UpdateUserService {
       birthday: user.birthday,
       weddingAnniversary: user.weddingAnniversary,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

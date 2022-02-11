@@ -7,7 +7,7 @@ export default class SignInUserControl {
 
     const signInUserService = new SignInUserService()
 
-    const user = await signInUserService.execute({ Email, Password }).finally()
+    const user = await signInUserService.execute({ Email, Password })
 
     return response.json(user)
   }

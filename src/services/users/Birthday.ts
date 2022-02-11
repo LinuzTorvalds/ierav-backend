@@ -7,7 +7,9 @@ export default class BirthdayUserService {
 
     const prisma = new PrismaClient()
 
-    const user = await prisma.users.findFirst({ where: { code: Code } })
+    const user = await prisma.users
+      .findFirst({ where: { code: Code } })
+      .finally(() => prisma.$disconnect())
 
     const dateCompare = moment(today).format('DD-MM')
 

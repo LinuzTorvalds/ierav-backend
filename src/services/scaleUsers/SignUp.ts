@@ -15,32 +15,33 @@ export default class SignUpScaleUserService {
 
     if (!Email) throw new Error('Email incorrect')
 
-    const userAlreadyExists = await prisma.scale_users.findUnique({
-      where: { email: Email },
-    })
+    const userAlreadyExists = await prisma.scale_users
+      .findUnique({
+        where: { email: Email },
+      })
+      .finally(() => prisma.$disconnect())
 
     if (userAlreadyExists) throw new Error('User already exists')
 
     const passwordHash = await hash(Password, 8)
 
-    const user = await prisma.scale_users.create({
-      data: {
-        code: uuid(),
-        name: Name,
-        email: Email,
-        password: passwordHash,
-        departament: Departament,
-      },
-    })
+    const user = await prisma.scale_users
+      .create({
+        data: {
+          code: uuid(),
+          name: Name,
+          email: Email,
+          password: passwordHash,
+          departament: Departament,
+        },
+      })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
-      code: user.code,
       name: user.name,
       email: Email,
       depaetament: Departament,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

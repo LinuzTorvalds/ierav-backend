@@ -7,7 +7,7 @@ export default class DeleteTokenUserControl {
 
     const deleteTokenService = new DeleteTokenService()
 
-    const user = await deleteTokenService.execute({ Email }).finally()
+    const user = await deleteTokenService.execute({ Email })
 
     return response.send(user)
   }

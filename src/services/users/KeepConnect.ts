@@ -7,7 +7,9 @@ export default class KeepConnectService {
   async execute({ Token }: userRequest) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.users.findFirst({ where: { token: Token } })
+    const user = await prisma.users
+      .findFirst({ where: { token: Token } })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
       code: user.code,
@@ -15,8 +17,6 @@ export default class KeepConnectService {
       email: user.email,
       token: user.token,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

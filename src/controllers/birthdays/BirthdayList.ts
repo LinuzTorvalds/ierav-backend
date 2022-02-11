@@ -5,7 +5,7 @@ export default class BirthdayListControl {
   async handle(request: Request, response: Response) {
     const birthdayList = new BirthdayListService()
 
-    const list = await birthdayList.execute().finally()
+    const list = await birthdayList.execute()
 
     if (list != null) return response.json(list)
     else return response.json('Sem aniversariantes essa semana :´(')

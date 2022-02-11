@@ -8,9 +8,10 @@ export default class UpdateBirthdayControl {
 
     const updateBirthdayService = new UpdateBirthdayService()
 
-    const wedding = await updateBirthdayService
-      .execute(Code, { Birthday, Name })
-      .finally()
+    const wedding = await updateBirthdayService.execute(Code, {
+      Birthday,
+      Name,
+    })
 
     return response.json(wedding)
   }

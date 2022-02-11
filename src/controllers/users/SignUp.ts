@@ -16,18 +16,16 @@ export default class SignUpUserControl {
 
     const signUpUserService = new SignUpUserService()
 
-    const user = await signUpUserService
-      .execute({
-        Name,
-        Sex,
-        MaritalStatus,
-        Email,
-        Password,
-        Charge,
-        Birthday,
-        WeddingAnniversary,
-      })
-      .finally()
+    const user = await signUpUserService.execute({
+      Name,
+      Sex,
+      MaritalStatus,
+      Email,
+      Password,
+      Charge,
+      Birthday,
+      WeddingAnniversary,
+    })
 
     return response.json(user)
   }

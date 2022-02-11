@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import CreateTokenService from './CreateToken'
+import CreateTokenService from '../../services/users/CreateToken'
 
 export default class CreateTokenUserControl {
   async handle(request: Request, response: Response) {
@@ -7,7 +7,7 @@ export default class CreateTokenUserControl {
 
     const createTokenService = new CreateTokenService()
 
-    const user = await createTokenService.execute({ Email }).finally()
+    const user = await createTokenService.execute({ Email })
 
     return response.send(user)
   }

@@ -11,21 +11,20 @@ export default class UpdateBirthdayService {
 
     if (!Code) throw new Error('Code incorrect')
 
-    const user = await prisma.birthdays.update({
-      data: {
-        name: Name,
-        birthday: new Date(Birthday),
-      },
-      where: { code: Code },
-    })
+    const user = await prisma.birthdays
+      .update({
+        data: {
+          name: Name,
+          birthday: new Date(Birthday),
+        },
+        where: { code: Code },
+      })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
-      code: user.code,
       name: user.name,
       birthday: user.birthday,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

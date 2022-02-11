@@ -7,7 +7,7 @@ export default class KeepConnectUserControl {
 
     const keepConnectService = new KeepConnectService()
 
-    const user = await keepConnectService.execute({ Token }).finally()
+    const user = await keepConnectService.execute({ Token })
 
     return response.send(user)
   }

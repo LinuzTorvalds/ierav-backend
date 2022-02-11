@@ -7,7 +7,7 @@ export default class WeddingBirthdayUserControl {
 
     const WeddingBirthday = new WeddingBirthdayUserService()
 
-    const user = await WeddingBirthday.execute(Code).finally()
+    const user = await WeddingBirthday.execute(Code)
 
     if (user != false) return response.json(user)
     else return response.json('no')

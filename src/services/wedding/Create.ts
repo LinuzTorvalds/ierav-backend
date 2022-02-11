@@ -10,21 +10,21 @@ export default class CreateWeddingService {
   async execute({ Name, Birthday }: userRequest) {
     const prisma = new PrismaClient()
 
-    const user = await prisma.wedding_aniversary.create({
-      data: {
-        code: uuid(),
-        name: Name,
-        birthday: new Date(Birthday),
-      },
-    })
+    const user = await prisma.wedding_aniversary
+      .create({
+        data: {
+          code: uuid(),
+          name: Name,
+          birthday: new Date(Birthday),
+        },
+      })
+      .finally(() => prisma.$disconnect())
 
     const userFind = {
       code: user.code,
       name: user.name,
       birthday: user.birthday,
     }
-
-    prisma.$disconnect()
 
     return userFind
   }

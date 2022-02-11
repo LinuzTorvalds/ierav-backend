@@ -16,17 +16,15 @@ export default class UpdateUserControl {
 
     const updateUserService = new UpdateUserService()
 
-    await updateUserService
-      .execute(Code, {
-        Name,
-        Sex,
-        MaritalStatus,
-        Email,
-        Password,
-        Birthday,
-        WeddingAnniversary,
-      })
-      .finally()
+    await updateUserService.execute(Code, {
+      Name,
+      Sex,
+      MaritalStatus,
+      Email,
+      Password,
+      Birthday,
+      WeddingAnniversary,
+    })
 
     return response.status(201).send('successfully updated :D')
   }
