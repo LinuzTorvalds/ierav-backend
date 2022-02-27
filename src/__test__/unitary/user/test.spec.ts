@@ -36,7 +36,7 @@ describe('nada º~º', () => {
     for (let user of birthdays) {
       const birthday = moment(user.birthday).add(1, 'days')
 
-      if (birthday >= sunday || birthday <= saturday) {
+      if (birthday >= sunday && birthday <= saturday) {
         listBirthdays.push({ ...user })
       }
     }
@@ -51,7 +51,7 @@ describe('nada º~º', () => {
     for (let user of weddings_Aninversary) {
       const weddingAnniversary = moment(user.birthday).add(1, 'days')
 
-      if (weddingAnniversary >= sunday || weddingAnniversary <= saturday) {
+      if (weddingAnniversary >= sunday && weddingAnniversary <= saturday) {
         let year = moment(today)
           .subtract(moment(weddingAnniversary).format('YYYY'), 'year')
           .format('YYYY')
