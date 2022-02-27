@@ -5,11 +5,6 @@ import {
   wedding_aniversary,
 } from '@prisma/client'
 import moment from 'moment'
-// import xl from 'excel4node'
-// const wb = new xl.Workbook({
-//   dateFormat: 'dd-mm-yyyy',
-// })
-// const ws = wb.addWorksheet('teste')
 
 export default class BirthdayListService {
   async execute() {
@@ -113,48 +108,6 @@ export default class BirthdayListService {
     result.listBirthdays = listBirthdays
 
     result.listWeddingAnniversary = listWeddingAnniversary
-
-    // export data for archive .xlsx
-
-    // ws.cell(1, 1).string('Aniversários natalicios')
-
-    // const headingColumnNames0 = ['nome', 'data']
-
-    // let headingColumnIndex = 1
-    // headingColumnNames0.forEach((heading) => {
-    //   ws.cell(3, headingColumnIndex++).string(heading)
-    // })
-
-    // let rowIndex = 4
-    // result.listBirthdays.forEach((record) => {
-    //   let columnIndex = 1
-    //   ws.cell(rowIndex, columnIndex++).string(record.name)
-    //   ws.cell(rowIndex, columnIndex++).date(record.birthday)
-    //   rowIndex++
-    // })
-    // rowIndex++
-
-    // ws.cell(rowIndex++, 1).string('Aniversários de casamento')
-
-    // const headingColumnNames1 = ['nome', 'data', 'anos', 'bodas']
-
-    // rowIndex++
-    // headingColumnIndex = 1
-    // headingColumnNames1.forEach((heading) => {
-    //   ws.cell(rowIndex, headingColumnIndex++).string(heading)
-    // })
-
-    // rowIndex++
-    // result.listWeddingAnniversary.forEach((record) => {
-    //   let columnIndex = 1
-    //   ws.cell(rowIndex, columnIndex++).string(record.name)
-    //   ws.cell(rowIndex, columnIndex++).date(record.birthday)
-    //   ws.cell(rowIndex, columnIndex++).string(record.year)
-    //   ws.cell(rowIndex, columnIndex++).string(record.wedding)
-    //   rowIndex++
-    // })
-
-    // wb.write('file.xlsx')
 
     if (
       result.listBirthdays.length === 0 &&
