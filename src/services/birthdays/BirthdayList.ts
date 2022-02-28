@@ -19,20 +19,20 @@ export default class BirthdayListService {
 
     const today = new Date()
 
-    var sunday, saturday
+    var sunday: moment.Moment, saturday: moment.Moment
 
     if (today.getDay() === 0) {
-      sunday = moment(today).format('DD-MM')
+      sunday = moment(today)
 
-      saturday = moment(today).add(6, 'days').format('DD-MM')
+      saturday = moment(today).add(6, 'days')
     } else {
       const days = 7 - today.getDay()
 
-      sunday = moment(today).add(days, 'days').toDate()
+      sunday = moment(today).add(days, 'days')
 
-      saturday = moment(sunday).add(6, 'days').format('DD-MM')
+      saturday = moment(sunday).add(6, 'days')
 
-      sunday = moment(sunday).format('DD-MM')
+      sunday = moment(sunday)
     }
 
     let listBirthdays = []
@@ -40,16 +40,16 @@ export default class BirthdayListService {
     for (let user of birthdays) {
       const birthday = moment(user.birthday).add(1, 'days').format('DD-MM-YYYY')
 
-      const start: string = sunday
+      const start: string = sunday.format('DD-MM')
 
-      const end: string = saturday
+      const end: string = saturday.format('DD-MM')
 
       if (
         birthday.substring(3, 5) == start.substring(3, 5) ||
         birthday.substring(3, 5) == end.substring(3, 5)
       ) {
         if (
-          birthday.substring(0, 2) >= start.substring(0, 2) &&
+          birthday.substring(0, 2) >= start.substring(0, 2) ||
           birthday.substring(0, 2) <= end.substring(0, 2)
         ) {
           listBirthdays.push({ ...user })
@@ -69,15 +69,15 @@ export default class BirthdayListService {
         .add(1, 'days')
         .format('DD-MM-YYYY')
 
-      const start: string = sunday
+      const start: string = sunday.format('DD-MM')
 
-      const end: string = saturday
+      const end: string = saturday.format('DD-MM')
       if (
         weddingAnniversary.substring(3, 5) == start.substring(3, 5) ||
         weddingAnniversary.substring(3, 5) == end.substring(3, 5)
       ) {
         if (
-          weddingAnniversary.substring(0, 2) >= start.substring(0, 2) &&
+          weddingAnniversary.substring(0, 2) >= start.substring(0, 2) ||
           weddingAnniversary.substring(0, 2) <= end.substring(0, 2)
         ) {
           let year = moment(today)
@@ -98,7 +98,7 @@ export default class BirthdayListService {
               .finally(() => prisma.$disconnect())
           const wedding = data.description
           year = data.year
-          listWeddingAnniversary.push({ ...user, wedding, year })
+          listWeddingAnniversary.push({ ...user, year, wedding })
         }
       }
     }
