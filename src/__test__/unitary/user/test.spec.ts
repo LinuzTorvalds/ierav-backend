@@ -17,7 +17,7 @@ describe('nada º~º', () => {
 
     const today = new Date()
 
-    var sunday, saturday
+    var sunday: moment.Moment, saturday: moment.Moment
 
     if (today.getDay() === 0) {
       sunday = moment(today)
@@ -34,10 +34,22 @@ describe('nada º~º', () => {
     let listBirthdays = []
 
     for (let user of birthdays) {
-      const birthday = moment(user.birthday).add(1, 'days')
+      const birthday = moment(user.birthday).add(1, 'days').format('DD-MM-YYYY')
 
-      if (birthday >= sunday && birthday <= saturday) {
-        listBirthdays.push({ ...user })
+      const start: string = sunday.format('DD-MM')
+
+      const end: string = saturday.format('DD-MM')
+
+      if (
+        birthday.substring(3, 5) == start.substring(3, 5) ||
+        birthday.substring(3, 5) == end.substring(3, 5)
+      ) {
+        if (
+          birthday.substring(0, 2) >= start.substring(0, 2) ||
+          birthday.substring(0, 2) <= end.substring(0, 2)
+        ) {
+          listBirthdays.push({ ...user })
+        }
       }
     }
 
