@@ -7,6 +7,9 @@ export default class BirthdayListControl {
 
     const data = await generateBirthdayList.execute()
 
-    return response.json(data)
+    const fileType =
+      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
+
+    return response.json({ data, fileType })
   }
 }

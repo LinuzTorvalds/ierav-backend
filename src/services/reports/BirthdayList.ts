@@ -25,9 +25,6 @@ export default class BirthdayListService {
 
     const buffer = await sheet.finishSheet()
 
-    const fileType =
-      'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8'
-
-    return new Blob([buffer], { type: fileType })
+    return buffer
   }
 }
