@@ -26,9 +26,6 @@ import CreateScaleUserControl from './controllers/scaleUsers/SignUp'
 import SignInScaleUserControl from './controllers/scaleUsers/SignIn'
 import ReadScaleUserControl from './controllers/scaleUsers/Read'
 
-//reports
-import ReportBirthdayListControl from './controllers/reports/BirthdayList'
-
 const router = Router()
 
 //aniversary
@@ -56,9 +53,6 @@ const updateScaleUserControl = new UpdateScaleUserControl()
 const createScaleUserControl = new CreateScaleUserControl()
 const signInScaleUserControl = new SignInScaleUserControl()
 const readScaleUserControl = new ReadScaleUserControl()
-
-//reports
-const generateBirthdayListControl = new ReportBirthdayListControl()
 
 //test
 router.get('/', (request: Request, response: Response) => {
@@ -90,8 +84,5 @@ router.put('/scaleuser/:Code', updateScaleUserControl.handle)
 router.get('/scaleuser/:Email', readScaleUserControl.handle)
 router.post('/scalesignup', createScaleUserControl.handle)
 router.post('/scalesignin', signInScaleUserControl.handle)
-
-//reports
-router.get('/reports/birthdaylist', generateBirthdayListControl.handle)
 
 export default router
